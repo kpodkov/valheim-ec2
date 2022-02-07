@@ -1,0 +1,32 @@
+name: Start Valheim Server
+
+on: workflow_dispatch
+
+env:
+  AWS_REGION: eu-west-1
+
+jobs:
+  start:
+    name: Start
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install jq figlet
+
+    - name: Install dependencies
+      run: |
+        aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].InstanceId' | paste -d " "  -s
