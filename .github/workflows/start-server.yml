@@ -1,9 +1,6 @@
 name: Start Valheim Server
 
-on:
-  push:
-    branches:
-      - master
+on: workflow_dispatch
 
 env:
   AWS_REGION: eu-west-1
