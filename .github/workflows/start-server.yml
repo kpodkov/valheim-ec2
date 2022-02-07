@@ -7,7 +7,7 @@ env:
 
 jobs:
   start:
-    name: Start
+    name: Start Server
     runs-on: ubuntu-latest
     environment: production
 
@@ -22,11 +22,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Install dependencies
+    - name: Start server
       run: |
-        sudo apt-get -y update
-        sudo apt-get -y install jq figlet
-
-    - name: Install dependencies
-      run: |
-        aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].InstanceId' | paste -d " "  -s
+        INSTANCE_ID="i-0f8993a1a9549b35a"
+        aws ec2 start-instances --instance-ids $INSTANCE_ID
