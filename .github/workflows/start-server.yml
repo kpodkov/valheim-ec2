@@ -27,4 +27,6 @@ jobs:
         INSTANCE_ID="i-0f8993a1a9549b35a"
         aws ec2 start-instances --instance-ids $INSTANCE_ID
         IP=$(aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].PublicIpAddress' | paste -d " "  -s)
+        sleep 5
         echo "Use this IP to connnect $IP"
+        aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].PublicIpAddress' | paste -d " "  -s
