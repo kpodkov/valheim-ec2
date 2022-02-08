@@ -34,4 +34,4 @@ jobs:
         PAYLOAD='{"username": "Valheim","content": "Server started with IP ['$IP']"}'
         curl --location --request POST '${{ secrets.DISCORD_WEBHOOK_URL }}' \
         --header 'Content-Type: application/json' \
-        --data-raw '$PAYLOAD'
+        --data $PAYLOAD
