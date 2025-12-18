@@ -29,6 +29,7 @@ jobs:
           aws ec2 start-instances --instance-ids $INSTANCE_ID
           sleep 5
         fi
+        sleep 15
         IP=$(aws ec2 describe-instances --output text --query "Reservations[*].Instances[*].PublicIpAddress" --filters Name=instance-state-name,Values=running Name=tag:Name,Values=valheim-server)
         echo "Use this IP to connect: ${IP}"
         PAYLOAD='{"username": "Valheim","content": "Server started with IP ['$IP']"}'
